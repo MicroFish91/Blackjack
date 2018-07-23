@@ -15,7 +15,7 @@ function createDeck(){
             //Assign card value
             switch (card.face) {
                 case "A":
-                    card.value = 1;
+                    card.value = 11;
                     break;
                 case "J":
                     card.value = 10;
@@ -81,10 +81,24 @@ function appendImage(cardID, appendLocation){
 function calculatePoints(array){
     
     var sum = 0;
-
-    array.forEach(function(index){
-        sum += index.value;
+    var pointsArray = array.map(function(index){
+        return parseInt(index.value);
     });
+
+    pointsArray.forEach(function(index){
+        sum += index;
+    });
+
+    // Converts Ace values to "1" as necessary
+    while ((sum > 21) && (pointsArray.indexOf(11) != -1)){
+        var aceIndex = pointsArray.indexOf(11);
+        sum = 0;
+        pointsArray[aceIndex] = 1;
+
+        pointsArray.forEach(function(index){
+            sum += index;
+        });
+    }
 
     return sum;
 }
@@ -135,24 +149,46 @@ function gameReset(){
 
 // Checks Who Won
 function checkWinner(){
-    var playerPoints = 0;
-    var dealerPoints = 0;
+    var playerPoints = calculatePoints(playerCards);
+    var dealerPoints = calculatePoints(dealerCards);
 
-    playerCards.forEach(function(index){
-        playerPoints += index;
-    });
+    // playerCards.forEach(function(index){
+    //     playerPoints += index.value;
+    // });
 
-    dealerCards.forEach(function(index){
-        dealerPoints += index;
-    });
+    // dealerCards.forEach(function(index){
+    //     dealerPoints += index.value;
+    // });
 
+    // Show Dealer Hand
+    showDealer();
+
+    // Checks to see who wins
     if (playerPoints >= dealerPoints) {
         alert("Player Wins!");
-    } else {
+    } else if ((dealerPoints > playerPoints) && (dealerPoints <= 21)){
         alert("Dealer Wins!");
+    } else {
+        alert("Dealer Busts!");
     }
 
     gameReset();
+
+}
+
+// Show Dealer's Hand
+function showDealer() {
+    var images = dealerHand.querySelectorAll("img");
+    
+    // Remove old images
+    images.forEach(function(index){
+        dealerHand.removeChild(index);
+    });
+
+    // Add new images
+    dealerCards.forEach(function(index){
+        appendImage(index.urlID, dealerHand);
+    });
 
 }
 
@@ -185,7 +221,7 @@ deal.addEventListener("click", () => {
     // Deal for dealer
     dealerCards.push(randomCard(cardDeck));
     dealerCards.push(randomCard(cardDeck));
-    appendImage(dealerCards[dealerCards.length - 2].urlID, dealerHand);
+    appendImage("blue_back", dealerHand);
     appendImage(dealerCards[dealerCards.length - 1].urlID, dealerHand);
 
     // Deal for Player
@@ -240,7 +276,6 @@ stand.addEventListener("click", () => {
 
     // Checks for a Bust
     setTimeout(() => {
-        bust(points, "Dealer", "You");
         checkWinner();
     }, 60);
 
