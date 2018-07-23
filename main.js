@@ -152,17 +152,6 @@ function checkWinner(){
     var playerPoints = calculatePoints(playerCards);
     var dealerPoints = calculatePoints(dealerCards);
 
-    // playerCards.forEach(function(index){
-    //     playerPoints += index.value;
-    // });
-
-    // dealerCards.forEach(function(index){
-    //     dealerPoints += index.value;
-    // });
-
-    // Show Dealer Hand
-    showDealer();
-
     // Checks to see who wins
     if (playerPoints >= dealerPoints) {
         alert("Player Wins!");
@@ -172,7 +161,7 @@ function checkWinner(){
         alert("Dealer Busts!");
     }
 
-    gameReset();
+    // gameReset();
 
 }
 
@@ -191,6 +180,39 @@ function showDealer() {
     });
 
 }
+
+// function bet(){
+//     var bet = "";
+    
+//     var promptCheck = false;
+
+//     while (!promptCheck){
+
+//         bet = parseInt(prompt("How many whole chips would you like to bet?"));
+
+//         if (bet > chips){
+//             alert("You do not have " + bet + " chips. Please try again.");
+//         } else if (bet <= chips){
+//             promptCheck = true;
+//         } else {
+//             alert("Invalid entry, please try enter an integer value.");
+//         }
+//     }
+// }
+
+// function chipTotal(winner){
+    
+//     var playerChips = querySelector("#player-chips");
+
+//     if winner {
+//         chips += bet;
+//     } else {
+//         chips -= bet;
+//     }
+
+//     playerChips.textContent = "Chips: " + chips;
+
+// }
 
 
 // Main
@@ -212,6 +234,7 @@ var dealerCards = [];
 var playerCards = [];
 
 var points = 0;
+// var chips = 50;
 
 // Deal Event (Triggered by clicking the deal button)
 deal.addEventListener("click", () => {
@@ -231,10 +254,6 @@ deal.addEventListener("click", () => {
     appendImage(playerCards[playerCards.length - 1].urlID, playerHand);
 
     // Calculate Points
-    points = calculatePoints(dealerCards);
-    document.querySelector("#dealer-points").textContent = "Points: " + points;
-    bust(points, "The Dealer");
-
     points = calculatePoints(playerCards);
     document.querySelector("#player-points").textContent = "Points: " + points;
     bust(points, "You");
@@ -276,8 +295,12 @@ stand.addEventListener("click", () => {
 
     // Checks for a Bust
     setTimeout(() => {
-        checkWinner();
-    }, 60);
+        
+        showDealer()
+        .then(() => checkWinner())
+        .then(() => gameReset());
+    }, 100);
 
 });
+
 

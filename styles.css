@@ -1,5 +1,6 @@
 body {
-    background-color: plum;
+    background: radial-gradient(lightblue, red, black);
+    font-family: helvetica;
 }
 
 h1 {
@@ -9,10 +10,12 @@ h1 {
 /* Entire Table Container */
 #table {
     position: relative;
-    background-color: rgb(14, 206, 14);
+    background: radial-gradient(lightgreen, rgb(14, 206, 14), black);
     border-radius: 50%;
     border: solid black;
     height: 100vh;
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.4);
+
 }
 
 /* Blackjack Header Message */
@@ -42,8 +45,10 @@ h1 {
     position: absolute;
     top: 26%;
     left: 15%;
-    background-color: lightgreen;
+    background: radial-gradient(lightblue,lightgreen, red);
     border: solid black;
+    border-radius: 5px;
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.4);
     width: 65%;
     height: 20vh;
 }
@@ -67,8 +72,10 @@ h1 {
     position: absolute;
     top: 58%;
     left: 15%;
-    background-color: lightgreen;
+    background: radial-gradient(lightblue,lightgreen, blue);
     border: solid black;
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
     width: 65%;
     height: 20vh; 
 }
@@ -99,8 +106,25 @@ h1 {
     margin: auto;
 }
 
+#player-chips {
+    position: absolute;
+    top: 85%;
+    left: 88%;
+    border: solid black;
+    background: radial-gradient(lightblue,lightgreen, yellow);
+    width: 10%;
+    height: 10vh;
+    border-radius: 20px;
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    line-height: 8vh;
+    font-size: 1.5em;
+}
+
 img {
     width: 9%;
-    margin-top: 0.5%;
-    margin-left: 0.5%;
+    margin-top: 1.5%;
+    margin-left: 1%;
+    box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 6%;
 }
