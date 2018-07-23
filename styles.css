@@ -1,0 +1,106 @@
+body {
+    background-color: plum;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+/* Entire Table Container */
+#table {
+    position: relative;
+    background-color: rgb(14, 206, 14);
+    border-radius: 50%;
+    border: solid black;
+    height: 100vh;
+}
+
+/* Blackjack Header Message */
+#game-header {
+    position: absolute;
+    left: 40%;
+    top: 3%;
+}
+
+/* Dealer Styles */
+#dealer-head {
+    position: absolute;
+    left: 15%;
+    top: 17%;
+    font-size: 3em;
+    color: black;
+}
+
+#dealer-points {
+    position: absolute;
+    top: 18.5%;
+    left: 65%;
+    font-size: 2.5em;
+}
+
+#dealer-hand {
+    position: absolute;
+    top: 26%;
+    left: 15%;
+    background-color: lightgreen;
+    border: solid black;
+    width: 65%;
+    height: 20vh;
+}
+
+/* Player Styles */
+#player-head {
+    position: absolute;
+    font-size: 3em;
+    top: 48%;
+    left: 15%;
+}
+
+#player-points {
+    position: absolute;
+    font-size: 2.5em;
+    top: 49.5%;
+    left: 65%;
+}
+
+#player-hand {
+    position: absolute;
+    top: 58%;
+    left: 15%;
+    background-color: lightgreen;
+    border: solid black;
+    width: 65%;
+    height: 20vh; 
+}
+
+/* Play Buttons */
+.buttons {
+    position: absolute;
+    top: 85%;
+    left: 40%;
+    width: 30%;
+}
+
+#deal-button {
+    width: 15%;
+    height: 4vh;
+    margin-left: auto;
+}
+
+#hit-button {
+    width: 15%;
+    height: 4vh;
+    margin: auto;
+}
+
+#stand-button {
+    width: 15%;
+    height: 4vh;
+    margin: auto;
+}
+
+img {
+    width: 9%;
+    margin-top: 0.5%;
+    margin-left: 0.5%;
+}
