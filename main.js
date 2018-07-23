@@ -108,6 +108,12 @@ function bust(points, user){
     if (points > 21){
         alert(user + " bust(s)!!");
         
+        if (user == "You"){
+            chipTotal(false);
+        } else {
+            chipTotal(true);
+        }
+
         // Reset Game
         gameReset();
     }
@@ -155,10 +161,13 @@ function checkWinner(){
     // Checks to see who wins
     if (playerPoints >= dealerPoints) {
         alert("Player Wins!");
+        chipTotal(true);
     } else if ((dealerPoints > playerPoints) && (dealerPoints <= 21)){
         alert("Dealer Wins!");
+        chipTotal(false);
     } else {
         alert("Dealer Busts!");
+        chipTotal(false);
     }
 
     // gameReset();
@@ -181,38 +190,39 @@ function showDealer() {
 
 }
 
-// function bet(){
-//     var bet = "";
+function bet(){
+    var bet = "";
     
-//     var promptCheck = false;
+    var promptCheck = false;
 
-//     while (!promptCheck){
+    while (!promptCheck){
 
-//         bet = parseInt(prompt("How many whole chips would you like to bet?"));
+        bet = parseInt(prompt("How many whole chips would you like to bet?"));
 
-//         if (bet > chips){
-//             alert("You do not have " + bet + " chips. Please try again.");
-//         } else if (bet <= chips){
-//             promptCheck = true;
-//         } else {
-//             alert("Invalid entry, please try enter an integer value.");
-//         }
-//     }
-// }
+        if (bet > chips){
+            alert("You do not have " + bet + " chips. Please try again.");
+        } else if (bet <= chips){
+            promptCheck = true;
+        } else {
+            alert("Invalid entry, please try enter an integer value.");
+        }
+    }
+}
 
-// function chipTotal(winner){
+// Updates Chips based on win or loss
+function chipTotal(winner){
     
-//     var playerChips = querySelector("#player-chips");
+    var playerChips = document.querySelector("#player-chips");
 
-//     if winner {
-//         chips += bet;
-//     } else {
-//         chips -= bet;
-//     }
+    if (winner) {
+        chips += bet;
+    } else {
+        chips -= bet;
+    }
 
-//     playerChips.textContent = "Chips: " + chips;
+    playerChips.textContent = "Chips: " + chips;
 
-// }
+}
 
 
 // Main
@@ -234,12 +244,14 @@ var dealerCards = [];
 var playerCards = [];
 
 var points = 0;
-// var chips = 50;
+var chips = 50;
 
 // Deal Event (Triggered by clicking the deal button)
 deal.addEventListener("click", () => {
 
     gameReset();
+
+    bet();
 
     // Deal for dealer
     dealerCards.push(randomCard(cardDeck));
@@ -274,7 +286,7 @@ hit.addEventListener("click", () => {
 
         // Checks for a Bust
         setTimeout(() => {
-            bust(points, "You", "Dealer");
+            bust(points, "You");
         }, 50);
     }
 
