@@ -167,11 +167,10 @@ function checkWinner(){
         chipTotal(false);
     } else {
         alert("Dealer Busts!");
-        chipTotal(false);
+        chipTotal(true);
     }
 
-    // gameReset();
-
+    setTimeout(() => {gameReset();}, 50);
 }
 
 // Show Dealer's Hand
@@ -190,9 +189,8 @@ function showDealer() {
 
 }
 
-function bet(){
-    var bet = "";
-    
+function myBet(){
+
     var promptCheck = false;
 
     while (!promptCheck){
@@ -245,13 +243,14 @@ var playerCards = [];
 
 var points = 0;
 var chips = 50;
+var bet = 0;
 
 // Deal Event (Triggered by clicking the deal button)
 deal.addEventListener("click", () => {
 
     gameReset();
 
-    bet();
+    myBet();
 
     // Deal for dealer
     dealerCards.push(randomCard(cardDeck));
@@ -267,8 +266,19 @@ deal.addEventListener("click", () => {
 
     // Calculate Points
     points = calculatePoints(playerCards);
-    document.querySelector("#player-points").textContent = "Points: " + points;
+    document.querySelector("#player-points")
+    .textContent = "Points: " + points;
     bust(points, "You");
+
+    // Blackjack! 21 on deal
+    if (points == 21) {
+        bet *= 1.5;
+        chipTotal(true);
+
+        setTimeout(() => {
+            alert("Blackjack!!!");
+            gameReset();}, 50);
+    }
 });
 
 
@@ -305,13 +315,10 @@ stand.addEventListener("click", () => {
         document.querySelector("#dealer-points").textContent = "Points: " + points;
     }
 
-    // Checks for a Bust
+    // Checks for Winner
     setTimeout(() => {
-        
-        showDealer()
-        .then(() => checkWinner())
-        .then(() => gameReset());
-    }, 100);
+        checkWinner();
+    }, 50);
 
 });
 
