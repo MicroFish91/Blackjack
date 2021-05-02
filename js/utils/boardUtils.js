@@ -1,3 +1,5 @@
+import { globalObj } from '../main.js';
+
 // Takes an Element Object and appends a Random Card to it
 export function appendImage(cardID, appendLocation){
     let image = document.createElement("img");
@@ -7,25 +9,25 @@ export function appendImage(cardID, appendLocation){
 
 // Show Dealer's Hand
 export function showDealer() {
-    let images = window.dealerHand.querySelectorAll("img"); 
+    let images = globalObj.dealerHand.querySelectorAll("img"); 
     
     // Remove old images
-    images.forEach(index => window.dealerHand.removeChild(index));
+    images.forEach(index => globalObj.dealerHand.removeChild(index));
 
     // Add new images
-    window.dealerCards.forEach(index => appendImage(index.urlID, window.dealerHand));
+    globalObj.dealerCards.forEach(index => appendImage(index.urlID, globalObj.dealerHand));
 }
 
 // Reset the Game Board
 export function gameReset(){
     
     // Empty Hands
-    window.dealerCards = [];
-    window.playerCards = [];
-    window.points = 0;
+    globalObj.dealerCards = [];
+    globalObj.playerCards = [];
+    globalObj.points = 0;
 
     // Checks to see if cards need replenishing
-    window.cardDeck.checkEmpty();
+    globalObj.cardDeck.checkEmpty();
 
     // Image Parent Elements
     let dHand = document.querySelector("#dealer-hand");

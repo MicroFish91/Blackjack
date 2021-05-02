@@ -1,7 +1,7 @@
 export default class Deck {
 
     constructor(){
-        this.deck = {};
+        this.deck = [];
         this.createDeck();
     }
 

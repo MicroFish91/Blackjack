@@ -1,4 +1,5 @@
 import { gameReset, showDealer } from "./boardUtils.js";
+import { globalObj } from '../main.js';
 
 // Checks if Dealer or Player has Busted
 export function bust(points, user){
@@ -22,13 +23,13 @@ export function getBet(){
     let playerChips = document.querySelector("#player-chips");
 
     while (!promptCheck){
-        window.bet = parseInt(prompt("How many whole chips would you like to bet?"));
-        if (window.bet > window.chips){
-            alert("You do not have " + window.bet + " chips. Please try again.");
-        } else if (window.bet <= window.chips){
+        globalObj.bet = parseInt(prompt("How many whole chips would you like to bet?"));
+        if (globalObj.bet > globalObj.chips){
+            alert("You do not have " + globalObj.bet + " chips. Please try again.");
+        } else if (globalObj.bet <= globalObj.chips){
             promptCheck = true;
-            window.chips -= window.bet;
-            playerChips.textContent = "Chips: " + window.chips;
+            globalObj.chips -= globalObj.bet;
+            playerChips.textContent = "Chips: " + globalObj.chips;
         } else {
             alert("Invalid entry, please try enter an integer value.");
         }
@@ -54,8 +55,8 @@ export function calculatePoints(array){
 
 // Checks Who Won
 export function checkWinner(){
-    let playerPoints = calculatePoints(window.playerCards);
-    let dealerPoints = calculatePoints(window.dealerCards);
+    let playerPoints = calculatePoints(globalObj.playerCards);
+    let dealerPoints = calculatePoints(globalObj.dealerCards);
 
     showDealer();
 
@@ -80,7 +81,7 @@ export function checkWinner(){
 export function chipTotal(winner){
     let playerChips = document.querySelector("#player-chips");
     if (winner) {
-        window.chips += 2 * window.bet;
+        globalObj.chips += 2 * globalObj.bet;
     } 
-    playerChips.textContent = "Chips: " + window.chips;
+    playerChips.textContent = "Chips: " + globalObj.chips;
 }
